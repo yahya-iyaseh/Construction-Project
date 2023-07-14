@@ -1,6 +1,6 @@
-const express = require("express");
-const mongoose = require("mongoose");
-var bodyParser = require("body-parser");
+const express = require('express');
+const mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,12 +27,11 @@ mongoose
 //   res.send(req.query);
 // });
 
+const UserRoute = require('./Routes/User.route');
 
-const UserRoute = require("./Routes/User.route");
-
-app.use("/api/auth", UserRoute);
-
-
+const TaskRoute = require('./Routes/Task.route');
+app.use('/tasks', TaskRoute);
+app.use('/api/auth', UserRoute);
 
 //Error handler
 app.use((err, req, res, next) => {
@@ -46,5 +45,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3000, () => {
-  console.log("connected");
+  console.log('connected');
 });
