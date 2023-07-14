@@ -34,11 +34,13 @@ const TaskSchema = new Schema({
   },
   due_date: {
     type: Date,
-    required: false,
+    required: true,
   },
+  
   category: {
     type: String,
     enum: [
+      'General',
       'Personal',
       'Work',
       'Education',
@@ -50,6 +52,17 @@ const TaskSchema = new Schema({
       'Projects',
       'Social',
     ],
+    default: 'General',
+  },
+  achievedPercentage: {
+    type: Number,
+    min: 0,
+    max: 100,
+    default: 0,
+  },
+  prerequisite_id: {
+    type: Number,
+    requried: false,
   },
   user_id: {
     type: Number,

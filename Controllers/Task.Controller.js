@@ -146,6 +146,7 @@ module.exports = {
 
   assignTaskToCategory: async (req, res, next) => {
     const { id, category } = req.body;
+
     try {
       const task = await Task.findById(id);
       if (!task) {
@@ -183,7 +184,34 @@ module.exports = {
       next(error);
     }
   },
+  setTaskPrerequisite: async (req, res, next) => {
+    const { taskId, prerequisite_id } = req.body;
 
+    try {
+      const task = await Task.findById(taskId);
+      const prerequisite = await Task.findById(prerequisite_id);
+
+      if (!task) {
+        throw createError(404, 'Task does not exist.');
+      }
+
+      if (!prerequisite) {
+        throw createError(404, 'Prerequisite task does not exist.');
+      }
+
+      task.prerequisite = prerequisite_id;
+
+      const result = await task.save();
+      res.send(result);
+    } catch (error) {
+      console.log(error.message);
+      if (error instanceof mongoose.CastError) {
+        next(createError(400, 'Invalid Task or Prerequisite Task ID'));
+        return;
+      }
+      next(error);
+    }
+  },
   markTaskCompleted: async (req, res, next) => {
     const { id } = req.body;
     try {
