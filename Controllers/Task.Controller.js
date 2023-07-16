@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 
-const Task = require('../Models/Task.model');
+const Task = require('../Models/Task');
 
 module.exports = {
   getAllTasks: async (req, res, next) => {
