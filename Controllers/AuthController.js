@@ -10,6 +10,7 @@ const register = (req, res, next) => {
   //     });
   //   }
   // });
+
   const salt = bcrypt.genSaltSync(10);
   let user = new User({
     name: req.body.name,

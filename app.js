@@ -3,11 +3,14 @@ const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 const User = require('./Models/User');
 const Task = require('./Models/Task');
+const cors = require('cors');
+
 
 var faker = require('faker');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 // async function insertTasksForUsers() {
 //   try {
 //     const users = await User.find({}); // Fetch all users from the User model
@@ -97,16 +100,7 @@ mongoose
     // });
   });
 
-//setting vapid keys details
 
-// app.get("/test", (req, res) => {
-//   console.log(req.query);
-//   res.send(req.query);
-// });
-// app.all("/test", (req, res) => {
-//   console.log(req.query);
-//   res.send(req.query);
-// });
 
 const UserRoute = require('./Routes/User.route');
 const TaskRoute = require('./Routes/Task.route');

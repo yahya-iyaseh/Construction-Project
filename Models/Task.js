@@ -4,39 +4,32 @@ const Schema = mongoose.Schema;
 const TaskSchema = new Schema({
   code: {
     type: String,
-    required: true,
     unique: true,
   },
   name: {
     type: String,
-    required: true,
   },
-
   description: {
     type: String,
-    required: true,
   },
   tag: {
-    type: String,
-    required: false,
+    type: [String], // Update the tag property to be an array of strings
   },
   priority: {
     type: String,
-    enum: ['High', 'Medium', 'Low'],
+    enum: ['high', 'medium', 'low'], // Use lowercase enum values for priority
+    default: 'medium', // Set a default value for priority
   },
-  pre_requisties: {
+  pre_requisites: {
     type: String,
-    required: false,
   },
   status: {
     type: String,
-    enum: ['done', 'cancelled', 'postopned', 'completed', 'incompleted'],
+    enum: ['done', 'cancelled', 'postponed', 'completed', 'incompleted'],
   },
   due_date: {
     type: Date,
-    required: true,
   },
-
   category: {
     type: String,
     enum: [
@@ -62,12 +55,10 @@ const TaskSchema = new Schema({
   },
   prerequisite_id: {
     type: Number,
-    requried: false,
   },
   user_id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
   },
 });
 
